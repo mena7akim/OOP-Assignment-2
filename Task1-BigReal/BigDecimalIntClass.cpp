@@ -170,7 +170,7 @@ string addition(string num1,string num2)
 
 //subtraction implementation
 string subtraction(string num1,string num2){
-    deque<long long>d;
+    deque<long long> d;
     string res;
 
     for (long long i = num1.length() - 1; i >= 0; i--)
@@ -321,8 +321,7 @@ int BigDecimalInt :: size()
 }
 
 // function returns the sign.
-int BigDecimalInt :: sign()
-{
+int BigDecimalInt :: sign() const {
     if (signNumber == '+')
     {
         return 1;
@@ -353,3 +352,4 @@ ostream &operator << (ostream &out, BigDecimalInt num)
     }
     return out;
 }
+

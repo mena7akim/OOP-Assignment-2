@@ -34,16 +34,16 @@ public:
     BigDecimalInt operator - (BigDecimalInt anotherDec);
     friend ostream &operator << (ostream &out, BigDecimalInt num);
     int size();
-    int sign();
+    int sign() const;
+    void setSign(char c) { signNumber = c; }
     void setNumber(string num);
-    string getNumber(){
-        return number;
-    }
-
-    BigDecimalInt(){}
-    BigDecimalInt(string num)
-    {
-        setNumber(num);
+    string getNumber() { return number; }
+    BigDecimalInt() : BigDecimalInt("0"){}
+    explicit BigDecimalInt(string num) { setNumber(num); }
+    explicit BigDecimalInt(int num){
+        if(num < 0) signNumber = '-';
+        else signNumber = '+';
+        number = to_string(abs(num));
     }
 
 };
