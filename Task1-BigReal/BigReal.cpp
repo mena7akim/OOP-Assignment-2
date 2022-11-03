@@ -3,11 +3,57 @@
 
 // Esraa
 
-BigReal::BigReal(double realNumber) {
+BigReal::BigReal(double realNumber)
+{
+    int real=realNumber;
+    decPart= to_string(real);
+    double fraction=(realNumber-real);
 
 }
 
-BigReal::BigReal(string realNumber) {
+BigReal::BigReal(string realNumber)
+{
+    regex validInput("[-+]?[0-9]+");
+    if( regex_match(realNumber, validInput))
+    {
+        string real;
+        int z=0;
+        // setNumber(realNumber);
+        if(realNumber[0] == '+')
+        {
+            realNumber.erase(0,1);
+            signNumber = '+';
+        }
+        else if (realNumber[0] == '-')
+        {
+            realNumber.erase(0,1);
+            signNumber = '-';
+        }
+        else
+        {
+            signNumber = '+';
+        }
+        long long size = realNumber.length();
+        for(long long i=0;i<size;i++)
+        {
+            z=i;
+            if(realNumber[i]!='.')
+            {
+                real += realNumber[i];
+            }
+            else
+                break;
+        }
+        decPart=real;
+        fractionPart="0";
+        for(long long i=z;i<size;i++)
+        {
+            fractionPart+=realNumber[i];
+        }
+
+    }
+    else
+        cout<<"invalid number";
 
 }
 
@@ -15,12 +61,18 @@ BigReal::BigReal(BigDecimalInt bigInteger) {
 
 }
 
-BigReal::BigReal(const BigReal &other) {
+BigReal::BigReal(const BigReal &other)//عايزه اسال علي ال valid
+{
+    decPart=other.decPart;
+    fractionPart=other.fractionPart;
 
 }
 
-BigReal::BigReal(BigReal&& other) noexcept {
-
+BigReal::BigReal(BigReal&& other) noexcept
+{
+    decPart=other.decPart;
+    fractionPart=other.fractionPart;
+    // make empty other
 }
 
 BigReal& BigReal::operator= (const BigReal& other) {

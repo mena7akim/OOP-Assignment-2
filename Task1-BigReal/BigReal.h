@@ -11,6 +11,7 @@ class BigReal {
     private:
         BigDecimalInt decPart;
         string fractionPart;
+        char signNumber;
     public:
         explicit BigReal (double realNumber = 0.0); // Default constructor
         explicit BigReal (string realNumber);
