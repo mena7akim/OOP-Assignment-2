@@ -74,3 +74,86 @@ string client::getAddress() const{
 string client::getPhone() const{
     return phone;
 }
+int BankingApplication::menu(int n){
+    cout << "Welcome to FCAI banking application" << endl;
+    cout << "1. Create a new account \n2. List clients and accounts \n3. Withdraw money \n4. Deposit money \n";
+    int choice;
+    cin >> choice;
+    return choice;
+}
+void BankingApplication::CreateAccount() {
+    int type;
+    cin >> type;
+    cout << "Enter client name: =======> ";
+    c1.getName();
+    cout << "Enter client address: =======> ";
+    c1.getAddress();
+    cout << "Enter client phone: =======> ";
+    c1.getPhone();
+    cout << "What type of account do you like?\n1. Basic. \n2. Saving. \n";
+
+    if (type == 1) {
+        cout << "Please enter the starting balance: =======> ";
+        c1.getBalance();
+        cout << "An account was created with ID " << c1.getAccountID() << " and starting balance "
+             << c1.getBalance() << " L.E." << endl;
+    } else if (type == 2) {
+        cout << "your information is saved" << endl;
+    }
+}
+void BankingApplication::ListClientsAndAccounts()
+{
+    cout << "Client name: " << c1.getName() << endl;
+    cout << "Client address: " << c1.getAddress() << endl;
+    cout << "Client phone: " << c1.getPhone() << endl;
+    cout << "Account ID: " << c1.getAccountID() << endl;
+    cout << "Account balance: " << c1.getBalance() << endl;
+}
+void BankingApplication::WithdrawMoney() {
+    cout << "Please enter account ID (e.g., FCAI-015): ======> ";
+    c1.getAccountID()
+    cout << "Account Id: " << c1.getAccountID() << endl;
+    cout << "Account type: ";
+    if (type == 1)
+        cout << "Basic";
+    else if (type == 2)
+        cout << "Saving";
+    cout << endl;
+    cout << "Balance: " << c1.getBalance() << endl;
+    while (true) {
+        cout << "please enter the amount to withdraw: =====> ";
+        int amount;
+        cin >> amount;
+        if (amount > c1.getBalance()) {
+            cout << "Sorry. this is more than what you cac withdraw.!" << endl;
+        } else {
+            c1.withdraw(amount);
+            cout << "New balance: " << c1.getBalance() << endl;
+            break;
+        }
+    }
+}
+void BankingApplication::DepositMoney() {
+    cout << "Please enter account ID (e.g., FCAI-015): ======> ";
+    c1.getAccountID()
+    cout << "Account Id: " << c1.getAccountID() << endl;
+    cout << "Account type: ";
+    if (type == 1)
+        cout << "Basic";
+    else if (type == 2)
+        cout << "Saving";
+    cout << endl;
+    cout << "Balance: " << c1.getBalance() << endl;
+    while (true) {
+        cout << "please enter the amount to deposit: =====> ";
+        int amount;
+        cin >> amount;
+        if (amount < 0) {
+            cout << "Sorry. enter a positive amount!" << endl;
+        } else {
+            c1.deposit(amount);
+            cout << "New balance: " << c1.getBalance() << endl;
+            break;
+        }
+    }
+}
