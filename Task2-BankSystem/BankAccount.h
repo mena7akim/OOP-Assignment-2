@@ -15,48 +15,11 @@ public:
     void setBalance(int balance);
     int getAccountID() const;
     int getBalance() const;
+    virtual int getAmount();
     virtual void withdraw(int amount);
-    void deposit(int amount);
+    virtual void deposit(int amount);
 };
-class SavingsBankAccount:public BankAccount
-{
-private:
-    int minAmount=1000;
-public:
-    SavingsBankAccount(int bal ,int minAm);
-    void setAmount(int min);
-    int getAmount();
-    void withdraw(int amount);
-    void deposit(int amount);
 
-};
-class client {
-private :
-    string name;
-    string address;
-    string phone;
-public:
-    client();
-    client(string name, string address, string phone);
-    void setName(string n);
-    string getName() const;
-    void setAddress(string ad);
-    string getAddress() const;
-    void setPhone(string ph);
-    string getPhone() const;
 
-};
-class BankingApplication {
-private:
-    client c1;
-    BankAccount basicAccount;
-    SavingsBankAccount savingAccount;
-public:
-    int menu(int n);
-    void CreateAccount();
-    void ListClientsAndAccounts();
-    void WithdrawMoney();
-    void DepositMoney();
-};
 
 #endif
