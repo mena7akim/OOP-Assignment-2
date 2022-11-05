@@ -81,32 +81,40 @@ int BankingApplication::menu(int n){
     cin >> choice;
     return choice;
 }
-void BankingApplication::CreateAccount() {
+void BankingApplication::CreateAccount(){
     int type;
-    cin >> type;
-    cout << "Enter client name: =======> ";
-    c1.getName();
-    cout << "Enter client address: =======> ";
-    c1.getAddress();
-    cout << "Enter client phone: =======> ";
-    c1.getPhone();
-    cout << "What type of account do you like?\n1. Basic. \n2. Saving. \n";
 
+    cout << "Enter client name: =======> ";
+    string name;
+    cin >> name;
+    c1.setName(name);
+    cout << "Enter client address: =======> ";
+    string address;
+    cin >> address;
+    c1.setAddress(address);
+    cout << "Enter client phone: =======> ";
+    string phone;
+    cin >> phone;
+    c1.setPhone(phone);
+    cout << "What type of account do you like?\n1. Basic. \n2. Saving. \n";
+    cin >> type;
     if (type == 1) {
         cout << "Please enter the starting balance: =======> ";
-        c1.getBalance();
-        cout << "An account was created with ID " << c1.getAccountID() << " and starting balance "
-             << c1.getBalance() << " L.E." << endl;
+        double balance;
+        cin >> balance;
+        basicAccount.setBalance(balance);
+        cout << "An account was created with ID " << accountID << " and starting balance "
+             << balance << " L.E." << endl;
     } else if (type == 2) {
-        cout << "your information is saved" << endl;
+        cout << "your information are saved" << endl;
     }
 }
 void BankingApplication::ListClientsAndAccounts()
 {
-    cout << "Client name: " << c1.getName() << endl;
-    cout << "Client address: " << c1.getAddress() << endl;
-    cout << "Client phone: " << c1.getPhone() << endl;
-    cout << "Account ID: " << c1.getAccountID() << endl;
+    cout << "Client name: " << name << endl;
+    cout << "Client address: " << address << endl;
+    cout << "Client phone: " << phone << endl;
+    cout << "Account ID: " << getAccountID() << endl;
     cout << "Account balance: " << c1.getBalance() << endl;
 }
 void BankingApplication::WithdrawMoney() {
@@ -119,7 +127,7 @@ void BankingApplication::WithdrawMoney() {
     else if (type == 2)
         cout << "Saving";
     cout << endl;
-    cout << "Balance: " << c1.getBalance() << endl;
+    cout << "Balance: " << getBalance() << endl;
     while (true) {
         cout << "please enter the amount to withdraw: =====> ";
         int amount;
@@ -128,7 +136,7 @@ void BankingApplication::WithdrawMoney() {
             cout << "Sorry. this is more than what you cac withdraw.!" << endl;
         } else {
             c1.withdraw(amount);
-            cout << "New balance: " << c1.getBalance() << endl;
+            cout << "New balance: " << getBalance() << endl;
             break;
         }
     }
@@ -143,7 +151,7 @@ void BankingApplication::DepositMoney() {
     else if (type == 2)
         cout << "Saving";
     cout << endl;
-    cout << "Balance: " << c1.getBalance() << endl;
+    cout << "Balance: " << balance << endl;
     while (true) {
         cout << "please enter the amount to deposit: =====> ";
         int amount;
@@ -151,8 +159,8 @@ void BankingApplication::DepositMoney() {
         if (amount < 0) {
             cout << "Sorry. enter a positive amount!" << endl;
         } else {
-            c1.deposit(amount);
-            cout << "New balance: " << c1.getBalance() << endl;
+            deposit(amount);
+            cout << "New balance: " << balance << endl;
             break;
         }
     }

@@ -30,15 +30,14 @@ public:
     void deposit(int amount);
 
 };
-class client : public BankAccount {
+class client {
 private :
     string name;
     string address;
     string phone;
-
 public:
     client();
-    client(strint name, string address, string phone);
+    client(string name, string address, string phone);
     void setName(string n);
     string getName() const;
     void setAddress(string ad);
@@ -47,8 +46,12 @@ public:
     string getPhone() const;
 
 };
-class BankingApplication : public BankAccount{
-    buplic:
+class BankingApplication {
+private:
+    client c1;
+    BankAccount basicAccount;
+    SavingsBankAccount savingAccount;
+public:
     int menu(int n);
     void CreateAccount();
     void ListClientsAndAccounts();
