@@ -16,14 +16,17 @@ void BankingApplication::CreateAccount(){
     string name;
     cin >> name;
     c1.setName(name);
+    cout << endl;
     cout << "Enter client address: =======> ";
     string address;
     cin >> address;
     c1.setAddress(address);
+    cout << endl;
     cout << "Enter client phone: =======> ";
     string phone;
     cin >> phone;
     c1.setPhone(phone);
+    cout << endl;
     cout << "What type of account do you like?\n1. Basic. \n2. Saving. \n";
     int t;
     cin >> t;
@@ -33,52 +36,76 @@ void BankingApplication::CreateAccount(){
     double balance;
     cin >> balance;
     basicAccount->setBalance(balance);
+    cout << endl;
     cout << "An account was created with ID " << basicAccount->getAccountID() << " and starting balance "
          << balance << " L.E." << endl;
     cout << "your information are saved" << endl;
 }
 void BankingApplication::ListClientsAndAccounts()
 {
-    cout << "Client name: " << name << endl;
-    cout << "Client address: " << address << endl;
-    cout << "Client phone: " << phone << endl;
-    cout << "Account ID: " << getAccountID() << endl;
-    cout << "Account balance: " << c1.getBalance() << endl;
+    cout << "Client name: ";
+    string name;
+    cin >> name;
+    c1.setName(name);
+    cout << endl;
+    cout << "Client address: ";
+    string address;
+    cin >> address;
+    c1.setAddress(address);
+    cout << endl;
+    cout << "Client phone: ";
+    string phone;
+    cin >> phone;
+    c1.setPhone(phone);
+    cout << endl;
+    cout << "Account ID: " << endl;
+    int ID;
+    cin >> ID;
+    basicAccount->setAccountID(ID);
+    cout << endl;
+    cout << "Account balance: " << endl;
+    double balance;
+    cin >> balance;
+    basicAccount->setBalance(balance);
+    cout << endl;
 }
 void BankingApplication::WithdrawMoney() {
     cout << "Please enter account ID (e.g., FCAI-015): ======> ";
-    int id = basicAccount->getAccountID();
-    cout << "Account Id: " << c1.getAccountID() << endl;
-    cout << "Account type: " << type << '\n';
+    int id ;
+    cin >> id;
+    basicAccount->setAccountID(id);
     cout << endl;
-    cout << "Balance: " << getBalance() << endl;
+    cout << "Account Id: "  << id << endl;
+    cout << "Account type: " << type << '\n';
+    cout << "Balance: " ;
+    double balance;
+    cin >> balance;
+    basicAccount->setBalance(balance);
+    cout << endl;
     cout << "please enter the amount to withdraw: =====> ";
     int amount;
     cin >> amount;
-    c1.withdraw(amount);
-    cout << "New balance: " << getBalance() << endl;
+    basicAccount->withdraw(amount);
+    cout << endl;
+    cout << "New balance: " << balance << endl;
 }
 void BankingApplication::DepositMoney() {
     cout << "Please enter account ID (e.g., FCAI-015): ======> ";
-    c1.getAccountID()
-    cout << "Account Id: " << c1.getAccountID() << endl;
-    cout << "Account type: ";
-    if (type == 1)
-        cout << "Basic";
-    else if (type == 2)
-        cout << "Saving";
+    int id;
+    cin >> id;
+    basicAccount->setAccountID(id);
     cout << endl;
-    cout << "Balance: " << balance << endl;
-    while (true) {
-        cout << "please enter the amount to deposit: =====> ";
-        int amount;
-        cin >> amount;
-        if (amount < 0) {
-            cout << "Sorry. enter a positive amount!" << endl;
-        } else {
-            deposit(amount);
-            cout << "New balance: " << balance << endl;
-            break;
-        }
-    }
+    cout << "Account Id: " << id << endl;
+    cout << "Account type: " << type << '\n';
+    cout << "Balance: " ;
+    int balance;
+    cin >> balance;
+    basicAccount->setBalance(balance);
+    cout << endl;
+    cout << "please enter the amount to deposit: =====> ";
+    int amount;
+    cin >> amount;
+    basicAccount->deposit(amount);
+    cout << endl;
+    cout << "New balance: " << balance << endl;
 }
