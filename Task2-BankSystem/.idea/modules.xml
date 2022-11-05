@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/BankAccount.cpp.iml" filepath="$PROJECT_DIR$/.idea/BankAccount.cpp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Task2-BankSystem.iml" filepath="$PROJECT_DIR$/.idea/Task2-BankSystem.iml" />
     </modules>
   </component>

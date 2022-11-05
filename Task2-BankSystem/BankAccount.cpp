@@ -56,3 +56,21 @@ void SavingsBankAccount::deposit(int amount)
     blance += amount;
 >>>>>>> origin/main
 }
+void client::setName(string n){
+    this->name = n;
+}
+void client::setAddress(string ad){
+    this->address = ad;
+}
+void client::setPhone(string ph){
+    this->phone = ph;
+}
+string client::getName() const{
+    return name;
+}
+string client::getAddress() const{
+    return address;
+}
+string client::getPhone() const{
+    return phone;
+}
