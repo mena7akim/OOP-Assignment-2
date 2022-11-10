@@ -1,34 +1,36 @@
-//
-// Created by over- on 09/11/2022.
-//
-
 #include "ComputerPlayer.h"
 
 
-ComputerPlayer::ComputerPlayer(char **copyBoard, int order, char symbol): Player(order, symbol) {
-    for(int i = 0; i < 3; i++){
-        for(int j = 0; j < 3; j++){
-            board[i][j] = copyBoard[i][j];
-        }
-    }
+ComputerPlayer::ComputerPlayer(char symbol) : Player(symbol) {
+
+}
+
+ComputerPlayer::ComputerPlayer(int order, char symbol): Player(order, symbol) { }
+
+ComputerPlayer::ComputerPlayer(Board &other) {
+    other.copyBoard(gameBoard);
+}
+
+void ComputerPlayer::getBoard(Board &other){
+    other.copyBoard(gameBoard);
 }
 
 int ComputerPlayer::score(){
     for(int i = 0; i < 3; i++){
-        if(board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != '-'){
-            return (board[i][0] == symbol ? 10 : -10);
+        if(gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][1] == gameBoard[i][2] && gameBoard[i][0] != '-'){
+            return (toupper(symbol) == gameBoard[i][0] ? 10 : -10);
         }
     }
     for(int i = 0; i < 3; i++){
-        if(board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != '-'){
-            return (board[0][i] == symbol ? 10 : -10);
+        if(gameBoard[0][i] == gameBoard[1][i] && gameBoard[1][i] == gameBoard[2][i] && gameBoard[0][i] != '-'){
+            return (toupper(symbol) == gameBoard[0][i] ? 10 : -10);
         }
     }
-    if(board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[1][1] != '-'){
-        return (board[0][0] == symbol ? 10 : -10);
+    if(gameBoard[0][0] == gameBoard[1][1] && gameBoard[0][0] == gameBoard[2][2] && gameBoard[1][1] != '-'){
+        return (toupper(symbol) == gameBoard[0][0] ? 10 : -10);
     }
-    if(board[0][2] == board[1][1] && board[2][0] == board[0][2] && board[1][1] != '-'){
-        return (board[0][0] == symbol ? 10 : -10);
+    if(gameBoard[0][2] == gameBoard[1][1] && gameBoard[2][0] == gameBoard[0][2] && gameBoard[1][1] != '-'){
+        return (toupper(symbol) == gameBoard[0][2] ? 10 : -10);
     }
     return 0;
 }
@@ -36,7 +38,7 @@ int ComputerPlayer::score(){
 bool ComputerPlayer::movesLeft(){
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            if(board[i][j] == '-'){
+            if(gameBoard[i][j] == '-'){
                 return 1;
             }
         }
@@ -48,41 +50,42 @@ int ComputerPlayer::minimax(bool turn){
     int currState = score();
     if(currState) return currState;
     if(!movesLeft()) return 0;
-    int bestMove;
+    int ret;
     if(turn){
-        bestMove = -10000;
+        ret = -10000;
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                if(board[i][j] == '-'){
-                    board[i][j] = 'x';
-                    bestMove = max(bestMove, minimax(!turn));
-                    board[i][j] = '-';
+                if(gameBoard[i][j] == '-'){
+                    gameBoard[i][j] = toupper(symbol);
+                    ret = max(ret, minimax(!turn));
+                    gameBoard[i][j] = '-';
                 }
             }
         }
     }
-    if(turn){
-        bestMove = 10000;
+    else{
+        ret = 10000;
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                if(board[i][j] == '-'){
-                    board[i][j] = 'x';
-                    bestMove = min(bestMove, minimax(!turn));
-                    board[i][j] = '-';
+                if(gameBoard[i][j] == '-'){
+                    gameBoard[i][j] = (toupper(symbol) == 'O' ? 'X' : 'O');
+                    ret = min(ret, minimax(!turn));
+                    gameBoard[i][j] = '-';
                 }
             }
         }
     }
-    return bestMove;
+    return ret;
 }
 
 void ComputerPlayer::findBest(){
-    int best = -11;
-    pair<int, int> bestCell;
+    int best = -10000;
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            if(board[i][j] == '-'){
-                int ret = minimax(1);
+            if(gameBoard[i][j] == '-'){
+                gameBoard[i][j] = toupper(symbol);
+                int ret = minimax(0);
+                gameBoard[i][j] = '-';
                 if(ret > best){
                     best = ret;
                     bestMove = {i, j};
@@ -93,3 +96,11 @@ void ComputerPlayer::findBest(){
 }
 
 pair<int,int> ComputerPlayer::getMove(){ return bestMove; }
+
+char ComputerPlayer::get_symbol(){
+    return toupper(symbol);
+}
+
+string ComputerPlayer::to_string(){
+    return "Player: Computer\n";
+}

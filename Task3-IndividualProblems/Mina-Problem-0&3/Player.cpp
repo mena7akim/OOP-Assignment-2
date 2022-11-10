@@ -1,18 +1,7 @@
-// Class definition for XO_Player class
-// Author:  Mohammad El-Ramly
-// Date:    10/10/2022
-// Version: 1
-#include<iostream>
-#include<random>
-#include<iomanip>
-#include<algorithm>
-#include"XO_Classes.hpp"
-using namespace std;
+#include "Player.h"
 
-// Give player a symbol to use in playing
-// It can be X or O or others
-// This is needed for computer players
-// as it does not ask for a name
+Player::Player() : name("Computer"), symbol('o'){}
+
 Player::Player(char symbol) {
     this->symbol = symbol;
 }

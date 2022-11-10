@@ -1,18 +1,14 @@
-// Class definition for XO_GameManager class
-// Author:  Mohammad El-Ramly
-// Date:    10/10/2022
-// Version: 1
+//
+// Created by over- on 10/11/2022.
+//
 
-#include <iostream>
-#include"XO_Classes.hpp"
-#include "ComputerPlayer.h"
-using namespace std;
+#include "GameManager.h"
 
 void GameManager::run() {
     Board x_o;
     int x, y;
     Player players = Player (1, 'x');
-    ComputerPlayer computer = ComputerPlayer(x_o.getboard(), 2, 'o');
+    ComputerPlayer computer = ComputerPlayer(2, 'o');
     x_o.display_board();
     while (true) {
         for (int i:{0,1}) {
@@ -32,14 +28,13 @@ void GameManager::run() {
                 }
             }
             else{
+                computer.getBoard(x_o);
                 computer.findBest();
                 pair<int,int> computerMove = computer.getMove();
-                while (!x_o.update_board (x, y, computer.get_symbol())){
-                    players.get_move(x, y);
-                }
+                x_o.update_board (computerMove.first, computerMove.second, computer.get_symbol());
                 x_o.display_board();
                 if (x_o.is_winner()){
-                    cout  << players.to_string() << " wins\n";
+                    cout  << computer.to_string() << " wins\n";
                     return;
                 }
                 if (x_o.is_draw()){

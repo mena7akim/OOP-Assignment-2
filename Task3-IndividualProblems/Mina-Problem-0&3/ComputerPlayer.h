@@ -1,21 +1,40 @@
-#ifndef MINA_PROBLEM_0_3_COMPUTERPLAYER_H
-#define MINA_PROBLEM_0_3_COMPUTERPLAYER_H
+//
+// Created by over- on 10/11/2022.
+//
 
-#include "XO_Classes.hpp"
+#ifndef MAIN_CPP_COMPUTERPLAYER_H
+#define MAIN_CPP_COMPUTERPLAYER_H
 
-class ComputerPlayer : protected Player{
+#include "Board.h"
+
+
+class ComputerPlayer : protected Player {
 private:
-    pair<int,int> bestMove;
-    char board[3][3];
+    pair<int, int> bestMove;
+    char gameBoard[3][3];
 public:
-    ComputerPlayer(char **copyBoard);
-    ComputerPlayer(char **copyBoard, int order, char symbol);
-    int score();
+    ComputerPlayer(char symbol);
+
+    ComputerPlayer(int order, char symbol);
+
+    ComputerPlayer(Board &other);
+
     bool movesLeft();
+
     int minimax(bool turn);
-    pair<int,int> getMove();
+
+    pair<int, int> getMove();
+
     void findBest();
+
+    void getBoard(Board &other);
+
+    char get_symbol();
+
+    string to_string();
+
+    int score();
 };
 
 
-#endif
+#endif //MAIN_CPP_COMPUTERPLAYER_H

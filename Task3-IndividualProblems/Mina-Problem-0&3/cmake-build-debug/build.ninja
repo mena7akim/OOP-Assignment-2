@@ -61,26 +61,20 @@ build CMakeFiles/Mina_Problem_0_3.dir/ComputerPlayer.cpp.obj: CXX_COMPILER__Mina
   OBJECT_DIR = CMakeFiles\Mina_Problem_0_3.dir
   OBJECT_FILE_DIR = CMakeFiles\Mina_Problem_0_3.dir
 
-build CMakeFiles/Mina_Problem_0_3.dir/XO_App.cpp.obj: CXX_COMPILER__Mina_Problem_0_3_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task3-IndividualProblems/Mina-Problem-0&3/XO_App.cpp || cmake_object_order_depends_target_Mina_Problem_0_3
-  DEP_FILE = CMakeFiles\Mina_Problem_0_3.dir\XO_App.cpp.obj.d
+build CMakeFiles/Mina_Problem_0_3.dir/GameManager.cpp.obj: CXX_COMPILER__Mina_Problem_0_3_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task3-IndividualProblems/Mina-Problem-0&3/GameManager.cpp || cmake_object_order_depends_target_Mina_Problem_0_3
+  DEP_FILE = CMakeFiles\Mina_Problem_0_3.dir\GameManager.cpp.obj.d
   FLAGS = -g -std=gnu++20
   OBJECT_DIR = CMakeFiles\Mina_Problem_0_3.dir
   OBJECT_FILE_DIR = CMakeFiles\Mina_Problem_0_3.dir
 
-build CMakeFiles/Mina_Problem_0_3.dir/XO_Board.cpp.obj: CXX_COMPILER__Mina_Problem_0_3_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task3-IndividualProblems/Mina-Problem-0&3/XO_Board.cpp || cmake_object_order_depends_target_Mina_Problem_0_3
-  DEP_FILE = CMakeFiles\Mina_Problem_0_3.dir\XO_Board.cpp.obj.d
+build CMakeFiles/Mina_Problem_0_3.dir/Board.cpp.obj: CXX_COMPILER__Mina_Problem_0_3_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task3-IndividualProblems/Mina-Problem-0&3/Board.cpp || cmake_object_order_depends_target_Mina_Problem_0_3
+  DEP_FILE = CMakeFiles\Mina_Problem_0_3.dir\Board.cpp.obj.d
   FLAGS = -g -std=gnu++20
   OBJECT_DIR = CMakeFiles\Mina_Problem_0_3.dir
   OBJECT_FILE_DIR = CMakeFiles\Mina_Problem_0_3.dir
 
-build CMakeFiles/Mina_Problem_0_3.dir/XO_GameManager.cpp.obj: CXX_COMPILER__Mina_Problem_0_3_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task3-IndividualProblems/Mina-Problem-0&3/XO_GameManager.cpp || cmake_object_order_depends_target_Mina_Problem_0_3
-  DEP_FILE = CMakeFiles\Mina_Problem_0_3.dir\XO_GameManager.cpp.obj.d
-  FLAGS = -g -std=gnu++20
-  OBJECT_DIR = CMakeFiles\Mina_Problem_0_3.dir
-  OBJECT_FILE_DIR = CMakeFiles\Mina_Problem_0_3.dir
-
-build CMakeFiles/Mina_Problem_0_3.dir/XO_Player.cpp.obj: CXX_COMPILER__Mina_Problem_0_3_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task3-IndividualProblems/Mina-Problem-0&3/XO_Player.cpp || cmake_object_order_depends_target_Mina_Problem_0_3
-  DEP_FILE = CMakeFiles\Mina_Problem_0_3.dir\XO_Player.cpp.obj.d
+build CMakeFiles/Mina_Problem_0_3.dir/Player.cpp.obj: CXX_COMPILER__Mina_Problem_0_3_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task3-IndividualProblems/Mina-Problem-0&3/Player.cpp || cmake_object_order_depends_target_Mina_Problem_0_3
+  DEP_FILE = CMakeFiles\Mina_Problem_0_3.dir\Player.cpp.obj.d
   FLAGS = -g -std=gnu++20
   OBJECT_DIR = CMakeFiles\Mina_Problem_0_3.dir
   OBJECT_FILE_DIR = CMakeFiles\Mina_Problem_0_3.dir
@@ -93,7 +87,7 @@ build CMakeFiles/Mina_Problem_0_3.dir/XO_Player.cpp.obj: CXX_COMPILER__Mina_Prob
 #############################################
 # Link the executable Mina_Problem_0_3.exe
 
-build Mina_Problem_0_3.exe: CXX_EXECUTABLE_LINKER__Mina_Problem_0_3_Debug CMakeFiles/Mina_Problem_0_3.dir/main.cpp.obj CMakeFiles/Mina_Problem_0_3.dir/ComputerPlayer.cpp.obj CMakeFiles/Mina_Problem_0_3.dir/XO_App.cpp.obj CMakeFiles/Mina_Problem_0_3.dir/XO_Board.cpp.obj CMakeFiles/Mina_Problem_0_3.dir/XO_GameManager.cpp.obj CMakeFiles/Mina_Problem_0_3.dir/XO_Player.cpp.obj
+build Mina_Problem_0_3.exe: CXX_EXECUTABLE_LINKER__Mina_Problem_0_3_Debug CMakeFiles/Mina_Problem_0_3.dir/main.cpp.obj CMakeFiles/Mina_Problem_0_3.dir/ComputerPlayer.cpp.obj CMakeFiles/Mina_Problem_0_3.dir/GameManager.cpp.obj CMakeFiles/Mina_Problem_0_3.dir/Board.cpp.obj CMakeFiles/Mina_Problem_0_3.dir/Player.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Mina_Problem_0_3.dir
