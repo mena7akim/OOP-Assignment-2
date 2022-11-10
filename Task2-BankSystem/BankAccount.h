@@ -30,24 +30,6 @@ public:
     void deposit(int amount);
 
 };
-class client : public BankAccount {
-private :
-    string name;
-    string address;
-    string phone;
-
-public:
-    client();
-    client(string name, string address, string phone);
-    void setName(string n);
-    string getName() const;
-    void setAddress(string ad);
-    string getAddress() const;
-    void setPhone(string ph);
-    string getPhone() const;
-
-};
-
 
 
 #endif
