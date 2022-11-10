@@ -3,20 +3,21 @@
 
 // Esraa
 
+
 BigReal::BigReal(double realNumber)
 {
-    int real=realNumber;
-    decPart= to_string(real);
-    double fraction=(realNumber-real);
+    long long real=realNumber;
+    *decPart= to_string(real);
+    *fractionPart=to_string(realNumber-real);
 
 }
 
 BigReal::BigReal(string realNumber)
 {
-    regex validInput("[-+]?[0-9]+");
+    string real;
+    regex validInput("[-+]?[0-9]*[\\.]?[0-9]*");
     if( regex_match(realNumber, validInput))
     {
-        string real;
         int z=0;
         // setNumber(realNumber);
         if(realNumber[0] == '+')
@@ -44,43 +45,64 @@ BigReal::BigReal(string realNumber)
             else
                 break;
         }
-        decPart=real;
-        fractionPart="0";
-        for(long long i=z;i<size;i++)
+        *decPart=real;
+        real.clear();
+        for(long long i=(z+1);i<size;i++)
         {
-            fractionPart+=realNumber[i];
+            real+=realNumber[i];
         }
+        *fractionPart=real;
 
     }
-    else
-        cout<<"invalid number";
+    else {
+        cout << "invalid number";
+        exit(1);
+    }
 
 }
 
-BigReal::BigReal(BigDecimalInt bigInteger) {
-
-}
-
-BigReal::BigReal(const BigReal &other)//عايزه اسال علي ال valid
+BigReal::BigReal(BigDecimalInt bigInteger)
 {
-    decPart=other.decPart;
-    fractionPart=other.fractionPart;
+    *decPart=bigInteger;
+    signNumber=bigInteger.sign();
+    *fractionPart="0";
+
+}
+
+BigReal::BigReal(const BigReal &other)
+{
+    *decPart=*other.decPart;
+    *fractionPart=*other.fractionPart;
+    signNumber=other.signNumber;
 
 }
 
 BigReal::BigReal(BigReal&& other) noexcept
 {
+    //not * because we don't need save his place
+    signNumber=other.signNumber;
     decPart=other.decPart;
     fractionPart=other.fractionPart;
-    // make empty other
-}
-
-BigReal& BigReal::operator= (const BigReal& other) {
+    other.fractionPart= nullptr;
+    other.decPart= nullptr;
 
 }
 
-BigReal& BigReal::operator= (BigReal&& other) noexcept {
+BigReal& BigReal::operator= (const BigReal& other)
+{
+    *decPart=*other.decPart;
+    signNumber=other.signNumber;
+    *fractionPart=*other.fractionPart;
 
+}
+
+BigReal& BigReal::operator= (BigReal&& other) noexcept
+{
+    signNumber=other.signNumber;
+    decPart=other.decPart;
+    fractionPart=other.fractionPart;
+    other.fractionPart= nullptr;
+    other.decPart= nullptr;
 }
 
 
@@ -90,24 +112,29 @@ BigReal& BigReal::operator= (BigReal&& other) noexcept {
 // Mina
 
 BigReal BigReal::operator+ (const BigReal& other) const {
-    if(decPart.sign() != other.decPart.sign()){
+    if(decPart->sign() != other.decPart->sign())
+    {
         BigReal left = *this, right = other;
-        if(decPart.sign()) {
-            right.decPart.setSign('+');
+        if(decPart->sign()) {
+            right.decPart->setSign('+');
             return left - right;
         }
-        left.decPart.setSign('-');
+        left.decPart->setSign('-');
         return right - left;
     }
-    BigReal res = ((*this).fractionPart.size() > other.fractionPart.size() ? *this : other);
+    BigReal res = ((*this).fractionPart->size() > other.fractionPart->size() ? *this : other);
     int carry = 0;
-    for(int i = min(res.fractionPart.size(), other.fractionPart.size()) - 1; i >= 0; i--){
-        int x = (res.fractionPart[i] - '0') + (other.fractionPart[i] - '0') + carry;
+    string fracPart1=res.fractionPart->getNumber(),fracPart2=other.fractionPart->getNumber();
+    for(int i = min(res.fractionPart->size(), other.fractionPart->size()) - 1; i >= 0; i--)
+    {
+
+        int x =(fracPart1[i] - '0') + (fracPart2[i] - '0') + carry;
         carry = (x > 9);
-        res.fractionPart[i] = char(x % 10 + '0');
+        fracPart1[i] = char(x % 10 + '0');
     }
-    if(carry) res.decPart = res.decPart + other.decPart + BigDecimalInt("1");
-    res.decPart.setSign((*this).size() ? '+' : '-');
+    if(carry)
+        *res.decPart = *res.decPart + *other.decPart + BigDecimalInt("1");
+    res.decPart->setSign((*this).size() ? '+' : '-');
     return res;
 }
 
@@ -115,37 +142,39 @@ BigReal BigReal::operator- (const BigReal& other) const {
     BigReal left = *this, right = other;
     if((*this).sign() != other.sign()){
         if((*this).sign()){
-            right.decPart.setSign('+');
+            right.decPart->setSign('+');
             return left + right;
         }
-        right.decPart.setSign('-');
+        right.decPart->setSign('-');
         return left + right;
     }
     BigReal ret;
-    left.decPart.setSign('+');
-    left.decPart.setSign('-');
+    left.decPart->setSign('+');
+    left.decPart->setSign('-');
     if(*this == other) return ret;
-    ret.decPart.setSign((*this).size() ? '+' : '-');
-    if(fractionPart.size() > other.fractionPart.size()) {
-        right.fractionPart = right.fractionPart + string(left.size() - right.size(), '0');
+    ret.decPart->setSign((*this).size() ? '+' : '-');
+    if(fractionPart->size() > other.fractionPart->size())
+    {
+        *right.fractionPart = *right.fractionPart + BigDecimalInt(string(left.size() - right.size(), '0'));
     }
     else{
-        left.fractionPart = left.fractionPart + string(right.size() - left.size(), '0');
+        *left.fractionPart = *left.fractionPart + BigDecimalInt(string(right.size() - left.size(), '0'));
     }
     if(left < right) {
         BigReal temp;
         temp = left;
         left = right;
         right = temp;
-        ret.decPart.setSign((*this).size() ? '-' : '+');
+        ret.decPart->setSign((*this).size() ? '-' : '+');
     }
-    ret.fractionPart = string(left.size(), '0');
-    for(int i = left.fractionPart.size() - 1; i >= 0; i--){
+    *ret.fractionPart = string(left.size(), '0');
+    string ret1=ret.fractionPart->getNumber(),rPart=right.fractionPart->getNumber(),lPart=left.fractionPart->getNumber();
+    for(int i = left.fractionPart->size() - 1; i >= 0; i--){
         if(left.fractionPart[i] < right.fractionPart[i]){
-            left.fractionPart[i - 1] -= 1;
-            left.fractionPart[i] += 10;
+            lPart[i - 1] -= 1;
+            lPart[i] += 10;
         }
-        ret.fractionPart[i] = char(left.fractionPart[i] - '0' - right.fractionPart[i] - '0' + '0');
+        ret1[i] = char(lPart[i] - '0' - rPart[i] - '0' + '0');
     }
     return ret;
 }

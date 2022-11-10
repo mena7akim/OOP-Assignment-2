@@ -1,7 +1,5 @@
 #include "BankAccount.h"
 
-
-
 BankAccount::BankAccount() : BankAccount(0){}
 BankAccount::BankAccount(int value) : accountID(-1), balance(value){}
 void BankAccount::setAccountID(int ID) {
@@ -22,7 +20,6 @@ void BankAccount::withdraw(int amount) {
     balance -= amount;
 }
 void BankAccount::deposit(int amount) {
-<<<<<<< HEAD
     balance += amount;
 }
 SavingsBankAccount ::SavingsBankAccount(int initialBal,int minAm)
@@ -52,7 +49,23 @@ void SavingsBankAccount::deposit(int amount)
 {
     if(amount >= 100)
         balance+=amount;
-=======
-    blance += amount;
->>>>>>> origin/main
 }
+void client::setName(string n){
+    this->name = n;
+}
+void client::setAddress(string ad){
+    this->address = ad;
+}
+void client::setPhone(string ph){
+    this->phone = ph;
+}
+string client::getName() const{
+    return name;
+}
+string client::getAddress() const{
+    return address;
+}
+string client::getPhone() const{
+    return phone;
+}
+

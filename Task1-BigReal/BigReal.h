@@ -9,8 +9,8 @@ using namespace std;
 
 class BigReal {
     private:
-        BigDecimalInt decPart;
-        string fractionPart;
+        BigDecimalInt* decPart=new BigDecimalInt("0");
+        BigDecimalInt* fractionPart=new BigDecimalInt("0");
         char signNumber;
     public:
         explicit BigReal (double realNumber = 0.0); // Default constructor
