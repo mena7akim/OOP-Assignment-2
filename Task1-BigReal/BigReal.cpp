@@ -186,6 +186,52 @@ BigReal BigReal::operator- (const BigReal& other) const {
 // Nervana
 
 bool BigReal::operator< (const BigReal& anotherReal) const {
+    if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '+')
+    {
+        if(decPart!=anotherReal.decPart)
+        {
+            if (decPart < anotherReal.decPart)
+                return true;
+            else if(decPart > anotherReal.decPart)
+                return false;
+        }
+        else if(decPart==anotherReal.decPart)
+        {
+            if(fractionPart<anotherReal.fractionPart)
+                return true;
+            else if(fractionPart>anotherReal.fractionPart)
+                return false;
+        }
+    }
+    else if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '-')
+    {
+        return false;
+    }
+    else if (decPart.signNumber == '-' && anotherReal.decPart.signNumber == '+')
+    {
+        return true;
+    }
+    else if (decPart.signNumber == '-' && anotherReal.decPart.signNumber == '-')
+    {
+        if (decPart != anotherReal.decPart)
+        {
+            if (decPart < anotherReal.decPart)
+            {
+                return false;
+            }
+            else if (decPart == anotherReal.decPart)
+            {
+                if(fractionPart < anotherReal.fractionPart)
+                {
+                    return false;
+                }
+                else if(fractionPart > anotherReal.fractionPart)
+                {
+                    return true;
+                }
+            }
+        }
+    }
 
 }
 
@@ -198,15 +244,37 @@ bool BigReal::operator== (const BigReal& anotherReal) const {
 }
 
 int BigReal::size() const {
-
+    return fractionPart.size();
 }
 
-int BigReal::sign() const {
-
+int BigReal::sign() const
+{
+    if (signNumber == '+')
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 ostream& operator << (ostream& out, BigReal num) {
-
+    if (num.signNumber == '+')
+    {
+        out << num.decPart;
+    }
+    else
+    {
+        if (num.decPart == "0")
+        {
+            out << num.decPart;
+        }
+        else
+        {
+            out << num.signNumber << num.decPart;
+        }
+    }
 }
 
 istream& operator >> (istream& out, BigReal num) {
