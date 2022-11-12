@@ -80,6 +80,7 @@ BigReal::BigReal(const BigReal &other)
 BigReal::BigReal(BigReal&& other) noexcept
 {
     //not * because we don't need save his place
+
     signNumber=other.signNumber;
     decPart=other.decPart;
     fractionPart=other.fractionPart;
@@ -98,11 +99,17 @@ BigReal& BigReal::operator= (const BigReal& other)
 
 BigReal& BigReal::operator= (BigReal&& other) noexcept
 {
-    signNumber=other.signNumber;
-    decPart=other.decPart;
-    fractionPart=other.fractionPart;
-    other.fractionPart= nullptr;
-    other.decPart= nullptr;
+    if(this != &other) {
+        delete[] decPart;
+        delete[] fractionPart;
+        signNumber = other.signNumber;
+        decPart = other.decPart;
+        fractionPart = other.fractionPart;
+        other.fractionPart = nullptr;
+        other.decPart = nullptr;
+    }
+    else
+        return *this;
 }
 
 
