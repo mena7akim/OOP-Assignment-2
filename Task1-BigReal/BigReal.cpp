@@ -240,7 +240,14 @@ bool BigReal::operator> (const BigReal& anotherReal) const {
 }
 
 bool BigReal::operator== (const BigReal& anotherReal) const {
-
+    if ((decPart == anotherReal.decPart) && (fractionPart == anotherReal.fractionPart) && (decPart.signNumber == anotherReal.decPart.signNumber))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 int BigReal::size() const {
