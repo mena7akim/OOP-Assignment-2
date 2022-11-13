@@ -129,20 +129,29 @@ BigReal BigReal::operator+ (const BigReal& other) const {
         left.decPart->setSign('-');
         return right - left;
     }
-    BigReal res = ((*this).fractionPart->size() > other.fractionPart->size() ? *this : other);
-    int carry = 0;
-    string fracPart1=res.fractionPart->getNumber(),fracPart2=other.fractionPart->getNumber();
-    for(int i = min(res.fractionPart->size(), other.fractionPart->size()) - 1; i >= 0; i--)
-    {
 
-        int x =(fracPart1[i] - '0') + (fracPart2[i] - '0') + carry;
-        carry = (x > 9);
-        fracPart1[i] = char(x % 10 + '0');
+    BigDecimalInt left = *(this->fractionPart), right = *(other.fractionPart);
+
+    // make the two fraction the same size
+    if(left.size() > right.size()) right = BigDecimalInt(right.getNumber() + string(left.size() - right.size(), '0'));
+    else left = BigDecimalInt(left.getNumber() + string(right.size() - left.size(), '0'));
+    BigDecimalInt fractionAddition = left + right;
+
+    left = *(this->decPart), right = *(other.decPart);
+    BigDecimalInt decAddition = left + right;
+    // if there was a carry from the fraction addition
+    if(fractionAddition.size() > max((*(this->fractionPart)).size(), (*(other.fractionPart)).size())){
+        decAddition = decAddition + BigDecimalInt("1"); // add 1 to the decimal part
+        string temp = fractionAddition.getNumber();
+        temp.erase(temp.begin()); // delete the carry from the fraction part
+        fractionAddition = BigDecimalInt(temp);
     }
-    if(carry)
-        *res.decPart = *res.decPart + *other.decPart + BigDecimalInt("1");
-    res.decPart->setSign((*this).size() ? '+' : '-');
-    return res;
+
+    BigReal ret;
+    *(ret.decPart) = decAddition;
+    *(ret.fractionPart) = fractionAddition;
+    ret.signNumber = (*this).signNumber;
+    return ret;
 }
 
 BigReal BigReal::operator- (const BigReal& other) const {
@@ -155,34 +164,45 @@ BigReal BigReal::operator- (const BigReal& other) const {
         right.decPart->setSign('-');
         return left + right;
     }
+
+    if(*this == other) return BigReal("0");
+
+    left.signNumber = 1;
+    right.signNumber = 1;
+
+    if(left < right) swap(left, right);
+
+    BigDecimalInt decSubtraction, fractionSubtraction;
+
+    // make the two fraction the same size
+    if(left.size() > right.size()) *(right.fractionPart) = BigDecimalInt((*(right.fractionPart)).getNumber() + string(left.size() - right.size(), '0'));
+    else *(left.fractionPart) = BigDecimalInt((*(left.fractionPart)).getNumber() + string(right.size() - left.size(), '0'));
+
+
+    // get one from the decimal part if the fraction part of the bigger number is less than the fraction part of the lower number
+    if(*(left.fractionPart) < *(right.fractionPart)){
+        *(left.decPart) = *(left.decPart) - BigDecimalInt("1");
+        string temp = (*(left.fractionPart)).getNumber();
+        temp[0] += 10;
+        (left.fractionPart)->setNumber(temp);
+    }
+
+    fractionSubtraction = *(left.fractionPart) - *(right.fractionPart);
+    decSubtraction = *(left.decPart) - *(right.decPart);
+
+    // removing leading zeros
+    string temp = decSubtraction.getNumber(), s = "";
+    bool found = 0;
+    for(int i = 0; i < temp.size(); i++){
+        if(temp[i] != '0') found = 1;
+        if(found) s += temp[i];
+    }
+    decSubtraction = BigDecimalInt(s);
+
     BigReal ret;
-    left.decPart->setSign('+');
-    left.decPart->setSign('-');
-    if(*this == other) return ret;
-    ret.decPart->setSign((*this).size() ? '+' : '-');
-    if(fractionPart->size() > other.fractionPart->size())
-    {
-        *right.fractionPart = *right.fractionPart + BigDecimalInt(string(left.size() - right.size(), '0'));
-    }
-    else{
-        *left.fractionPart = *left.fractionPart + BigDecimalInt(string(right.size() - left.size(), '0'));
-    }
-    if(left < right) {
-        BigReal temp;
-        temp = left;
-        left = right;
-        right = temp;
-        ret.decPart->setSign((*this).size() ? '-' : '+');
-    }
-    *ret.fractionPart = string(left.size(), '0');
-    string ret1=ret.fractionPart->getNumber(),rPart=right.fractionPart->getNumber(),lPart=left.fractionPart->getNumber();
-    for(int i = left.fractionPart->size() - 1; i >= 0; i--){
-        if(left.fractionPart[i] < right.fractionPart[i]){
-            lPart[i - 1] -= 1;
-            lPart[i] += 10;
-        }
-        ret1[i] = char(lPart[i] - '0' - rPart[i] - '0' + '0');
-    }
+    *(ret.decPart) = decSubtraction;
+    *(ret.fractionPart) = fractionSubtraction;
+    ret.signNumber = (*this > other ? (*this).signNumber : other.signNumber);
     return ret;
 }
 
