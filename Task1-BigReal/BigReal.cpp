@@ -212,22 +212,31 @@ BigReal BigReal::operator- (const BigReal& other) const {
 
 // Nervana
 
-bool BigReal::operator< (const BigReal& anotherReal) const {
+bool BigReal::operator< (const BigReal& anotherReal) const
+{
     if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '+')
     {
-        if(decPart!=anotherReal.decPart)
+        if (decPart != anotherReal.decPart)
         {
             if (decPart < anotherReal.decPart)
+            {
                 return true;
-            else if(decPart > anotherReal.decPart)
+            }
+            else if (decPart > anotherReal.decPart)
+            {
                 return false;
+            }
         }
-        else if(decPart==anotherReal.decPart)
+        else if (decPart == anotherReal.decPart)
         {
-            if(fractionPart<anotherReal.fractionPart)
+            if (fractionPart < anotherReal.fractionPart)
+            {
                 return true;
-            else if(fractionPart>anotherReal.fractionPart)
+            }
+            else
+            {
                 return false;
+            }
         }
     }
     else if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '-')
@@ -246,27 +255,89 @@ bool BigReal::operator< (const BigReal& anotherReal) const {
             {
                 return false;
             }
-            else if (decPart == anotherReal.decPart)
+            else if (decPart > anotherReal.decPart)
             {
-                if(fractionPart < anotherReal.fractionPart)
-                {
-                    return false;
-                }
-                else if(fractionPart > anotherReal.fractionPart)
-                {
-                    return true;
-                }
+                return true;
+            }
+        }
+        else if (decPart == anotherReal.decPart)
+        {
+            if (fractionPart < anotherReal.fractionPart)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }
-
 }
 
-bool BigReal::operator> (const BigReal& anotherReal) const {
-
+bool BigReal::operator> (const BigReal& anotherReal) const
+{
+    if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '+')
+    {
+        if (decPart != anotherReal.decPart)
+        {
+            if (decPart > anotherReal.decPart)
+            {
+                return true;
+            }
+            else if (decPart < anotherReal.decPart)
+            {
+                return false;
+            }
+        }
+        else if (decPart == anotherReal.decPart)
+        {
+            if (fractionPart > anotherReal.fractionPart)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    else if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '-')
+    {
+        return true;
+    }
+    else if (decPart.signNumber == '-' && anotherReal.decPart.signNumber == '+')
+    {
+        return false;
+    }
+    else if (decPart.signNumber == '-' && anotherReal.decPart.signNumber == '-')
+    {
+        if (decPart != anotherReal.decPart)
+        {
+            if (decPart > anotherReal.decPart)
+            {
+                return false;
+            }
+            else if (decPart < anotherReal.decPart)
+            {
+                return true;
+            }
+        }
+        else if (decPart == anotherReal.decPart)
+        {
+            if (fractionPart > anotherReal.fractionPart)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
 }
 
-bool BigReal::operator== (const BigReal& anotherReal) const {
+bool BigReal::operator== (const BigReal& anotherReal) const
+{
     if ((decPart == anotherReal.decPart) && (fractionPart == anotherReal.fractionPart) && (decPart.signNumber == anotherReal.decPart.signNumber))
     {
         return true;
@@ -277,8 +348,9 @@ bool BigReal::operator== (const BigReal& anotherReal) const {
     }
 }
 
-int BigReal::size() const {
-    return fractionPart.size();
+int BigReal::size() const
+{
+    return fractionPart.size() + decPart.size();
 }
 
 int BigReal::sign() const
@@ -293,26 +365,23 @@ int BigReal::sign() const
     }
 }
 
-ostream& operator << (ostream& out, BigReal num) {
+ostream& operator << (ostream& out, BigReal num)
+{
     if (num.signNumber == '+')
     {
-        out << num.decPart;
+        out << num.decPart << "." << num.fractionPart;
     }
     else
     {
-        if (num.decPart == "0")
-        {
-            out << num.decPart;
-        }
-        else
-        {
-            out << num.signNumber << num.decPart;
-        }
+        out << num.signNumber << num.signNumber << num.decPart;
     }
 }
 
-istream& operator >> (istream& out, BigReal num) {
-
+istream& operator >> (istream& out, BigReal num)
+{
+    num.decPart >> decPart;
+    num.fractionPart >> fractionPart;
+    num.signNumber >> signNumber;
 }
 
 
