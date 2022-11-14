@@ -4,7 +4,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class BankAccount {
+class BankAccount
+        {
 protected:
     int accountID;
     double balance;

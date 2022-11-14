@@ -22,7 +22,6 @@ void BankAccount::withdraw(int amount) {
     balance -= amount;
 }
 void BankAccount::deposit(int amount) {
-<<<<<<< HEAD
     balance += amount;
 }
 SavingsBankAccount ::SavingsBankAccount(int initialBal,int minAm)
@@ -52,7 +51,6 @@ void SavingsBankAccount::deposit(int amount)
 {
     if(amount >= 100)
         balance+=amount;
-=======
-    blance += amount;
->>>>>>> origin/main
+    balance += amount;
+
 }
