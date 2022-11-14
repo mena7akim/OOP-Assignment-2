@@ -6,16 +6,14 @@
 #define TASK2_BANKSYSTEM_BANKINGAPPLICATION_H
 
 #include "Client.h"
-#include "BankAccount.h"
-#include "SavingsBankAccount.h"
 
 class BankingApplication {
 private:
-    Client c1;
-    BankAccount *basicAccount;
-    string type;
+    vector<Client> client;
+    vector<BankAccount*> bankAccount;
 public:
-    int menu();
+    BankingApplication();
+    void menu();
     void CreateAccount();
     void ListClientsAndAccounts();
     void WithdrawMoney();

@@ -5,22 +5,24 @@
 #ifndef TASK2_BANKSYSTEM_CLIENT_H
 #define TASK2_BANKSYSTEM_CLIENT_H
 
-#include <bits/stdc++.h>
-using namespace std;
+#include "SavingsBankAccount.h"
 
 class Client {
 private :
     string name;
     string address;
     string phone;
+    BankAccount *clientAccount;
 public:
     Client();
     Client(string name, string address, string phone);
     void setName(string n);
-    string getName() const;
     void setAddress(string ad);
-    string getAddress() const;
     void setPhone(string ph);
+    void pointToAccount(BankAccount &account);
+    BankAccount& getClientAccount();
+    string getName() const;
+    string getAddress() const;
     string getPhone() const;
 };
 

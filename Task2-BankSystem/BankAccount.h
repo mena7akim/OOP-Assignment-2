@@ -4,32 +4,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class BankAccount
-        {
+
+class BankAccount{
 protected:
+    static int ID;
     int accountID;
     double balance;
 public:
     explicit BankAccount();
     explicit BankAccount(int value);
-    void setAccountID(int ID);
-    void setBalance(int balance);
-    int getAccountID() const;
-    int getBalance() const;
+    virtual void setMinBalance(int min);
+    virtual int getMinBalance() const;
+    virtual string accountType();
+    virtual void setBalance(int bal);
+    virtual int getAccountID() const;
+    virtual int getBalance() const;
     virtual void withdraw(int amount);
-    void deposit(int amount);
-};
-class SavingsBankAccount:public BankAccount
-{
-private:
-    int minAmount=1000;
-public:
-    SavingsBankAccount(int bal ,int minAm);
-    void setAmount(int min);
-    int getAmount();
-    void withdraw(int amount);
-    void deposit(int amount);
-
+    virtual void deposit(int amount);
 };
 
 

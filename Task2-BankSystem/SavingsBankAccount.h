@@ -7,18 +7,21 @@
 
 #include "BankAccount.h"
 
-class SavingsBankAccount:public BankAccount
+class SavingsBankAccount : public BankAccount
 {
 private:
-    int minAmount=1000;
+    int minBalance = 100;
 public:
     SavingsBankAccount();
-    SavingsBankAccount(int bal ,int minAm):BankAccount(bal), minAmount(minAm){}
-    void setAmount(int min);
-    int getAmount();
-    void withdraw(int amount);
-    void deposit(int amount);
-
+    SavingsBankAccount(int bal ,int minAm);
+    string accountType() override;
+    void setMinBalance(int min) override;
+    void setBalance(int bal) override;
+    int getMinBalance() const override;
+    int getAccountID() const override;
+    int getBalance() const override;
+    void withdraw(int amount) override;
+    void deposit(int amount) override;
 };
 
 

@@ -3,4 +3,4 @@ project(Task2_BankSystem)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Task2_BankSystem main.cpp BankAccount.cpp BankAccount.h)
+add_executable(Task2_BankSystem main.cpp BankAccount.cpp BankAccount.h SavingsBankAccount.cpp Client.cpp BankingApplication.cpp SavingsBankAccount.h Client.h BankingApplication.h)

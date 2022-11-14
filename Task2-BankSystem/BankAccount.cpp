@@ -1,14 +1,23 @@
 #include "BankAccount.h"
 
 
+int BankAccount::ID = 0;
 
-BankAccount::BankAccount() : BankAccount(0){}
-BankAccount::BankAccount(int value) : accountID(-1), balance(value){}
-void BankAccount::setAccountID(int ID) {
-    this->accountID = ID;
+BankAccount::BankAccount() : BankAccount(0){
+    ID++;
+    accountID = ID;
 }
-void BankAccount::setBalance(int balance) {
-    this->balance = balance;
+BankAccount::BankAccount(int value) : balance(value){
+    ID++;
+    accountID = ID;
+}
+
+string BankAccount::accountType() {
+    return "Bank Account";
+}
+
+void BankAccount::setBalance(int bal) {
+    this->balance = bal;
 }
 
 int BankAccount::getAccountID() const {
@@ -19,38 +28,19 @@ int BankAccount::getBalance() const {
 }
 
 void BankAccount::withdraw(int amount) {
+    if(amount > balance){
+        throw invalid_argument("Operation failed, Amount you want to withdraw is bigger than your account balance.");
+    }
     balance -= amount;
 }
 void BankAccount::deposit(int amount) {
     balance += amount;
 }
-SavingsBankAccount ::SavingsBankAccount(int initialBal,int minAm)
-{
-    if(initialBal>=minAm)
-        minAmount=minAm;
 
-    setBalance(initialBal);
+int BankAccount::getMinBalance() const {
+    return 0;
 }
 
-void SavingsBankAccount::setAmount(int min)
-{
-    minAmount=min;
-}
-
-int SavingsBankAccount::getAmount()
-{
-    return minAmount;
-}
-
-void SavingsBankAccount::withdraw(int amount)
-{
-    if (amount >= minAmount)
-        balance-=amount;
-}
-void SavingsBankAccount::deposit(int amount)
-{
-    if(amount >= 100)
-        balance+=amount;
-    balance += amount;
-
+void BankAccount::setMinBalance(int min) {
+    return;
 }

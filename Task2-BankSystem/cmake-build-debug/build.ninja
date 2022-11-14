@@ -61,6 +61,24 @@ build CMakeFiles/Task2_BankSystem.dir/BankAccount.cpp.obj: CXX_COMPILER__Task2_B
   OBJECT_DIR = CMakeFiles\Task2_BankSystem.dir
   OBJECT_FILE_DIR = CMakeFiles\Task2_BankSystem.dir
 
+build CMakeFiles/Task2_BankSystem.dir/SavingsBankAccount.cpp.obj: CXX_COMPILER__Task2_BankSystem_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task2-BankSystem/SavingsBankAccount.cpp || cmake_object_order_depends_target_Task2_BankSystem
+  DEP_FILE = CMakeFiles\Task2_BankSystem.dir\SavingsBankAccount.cpp.obj.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles\Task2_BankSystem.dir
+  OBJECT_FILE_DIR = CMakeFiles\Task2_BankSystem.dir
+
+build CMakeFiles/Task2_BankSystem.dir/Client.cpp.obj: CXX_COMPILER__Task2_BankSystem_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task2-BankSystem/Client.cpp || cmake_object_order_depends_target_Task2_BankSystem
+  DEP_FILE = CMakeFiles\Task2_BankSystem.dir\Client.cpp.obj.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles\Task2_BankSystem.dir
+  OBJECT_FILE_DIR = CMakeFiles\Task2_BankSystem.dir
+
+build CMakeFiles/Task2_BankSystem.dir/BankingApplication.cpp.obj: CXX_COMPILER__Task2_BankSystem_Debug C$:/Users/over-/CLionProjects/OOP-Assignment-2/Task2-BankSystem/BankingApplication.cpp || cmake_object_order_depends_target_Task2_BankSystem
+  DEP_FILE = CMakeFiles\Task2_BankSystem.dir\BankingApplication.cpp.obj.d
+  FLAGS = -g -std=gnu++20
+  OBJECT_DIR = CMakeFiles\Task2_BankSystem.dir
+  OBJECT_FILE_DIR = CMakeFiles\Task2_BankSystem.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Task2_BankSystem
@@ -69,7 +87,7 @@ build CMakeFiles/Task2_BankSystem.dir/BankAccount.cpp.obj: CXX_COMPILER__Task2_B
 #############################################
 # Link the executable Task2_BankSystem.exe
 
-build Task2_BankSystem.exe: CXX_EXECUTABLE_LINKER__Task2_BankSystem_Debug CMakeFiles/Task2_BankSystem.dir/main.cpp.obj CMakeFiles/Task2_BankSystem.dir/BankAccount.cpp.obj
+build Task2_BankSystem.exe: CXX_EXECUTABLE_LINKER__Task2_BankSystem_Debug CMakeFiles/Task2_BankSystem.dir/main.cpp.obj CMakeFiles/Task2_BankSystem.dir/BankAccount.cpp.obj CMakeFiles/Task2_BankSystem.dir/SavingsBankAccount.cpp.obj CMakeFiles/Task2_BankSystem.dir/Client.cpp.obj CMakeFiles/Task2_BankSystem.dir/BankingApplication.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Task2_BankSystem.dir

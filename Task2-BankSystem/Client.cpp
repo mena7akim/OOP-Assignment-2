@@ -1,19 +1,33 @@
-//
-// Created by over- on 05/11/2022.
-//
-
 #include "Client.h"
 
 
+Client::Client() {
+
+}
+
+Client::Client(string name, string address, string phone) : name(name), address(address), phone(phone) {
+
+}
+
+
 void Client::setName(string n){
-    this->name = n;
+    name = n;
 }
 void Client::setAddress(string ad){
-    this->address = ad;
+    address = ad;
 }
 void Client::setPhone(string ph){
-    this->phone = ph;
+    phone = ph;
 }
+void Client::pointToAccount(BankAccount &account) {
+    clientAccount = &account;
+}
+
+BankAccount& Client::getClientAccount() {
+    return *clientAccount;
+}
+
+
 string Client::getName() const{
     return name;
 }
