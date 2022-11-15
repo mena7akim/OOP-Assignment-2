@@ -1,6 +1,3 @@
-//
-// Created by over- on 05/11/2022.
-//
 
 #ifndef TASK2_BANKSYSTEM_SAVINGSBANKACCOUNT_H
 #define TASK2_BANKSYSTEM_SAVINGSBANKACCOUNT_H
@@ -11,6 +8,7 @@ class SavingsBankAccount : public BankAccount
 {
 private:
     int minBalance = 100;
+
 public:
     SavingsBankAccount();
     SavingsBankAccount(int bal ,int minAm);
@@ -25,4 +23,4 @@ public:
 };
 
 
-#endif //TASK2_BANKSYSTEM_SAVINGSBANKACCOUNT_H
+#endif

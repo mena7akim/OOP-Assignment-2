@@ -13,8 +13,11 @@ protected:
 public:
     explicit BankAccount();
     explicit BankAccount(int value);
+
     virtual void setMinBalance(int min);
     virtual int getMinBalance() const;
+
+
     virtual string accountType();
     virtual void setBalance(int bal);
     virtual int getAccountID() const;

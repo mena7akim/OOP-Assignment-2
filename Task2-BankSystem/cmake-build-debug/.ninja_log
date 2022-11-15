@@ -30,3 +30,9 @@
 14	2761	6901322396307375	CMakeFiles/Task2_BankSystem.dir/SavingsBankAccount.cpp.obj	79556cf42827e91c
 2549	4711	6901322415803048	CMakeFiles/Task2_BankSystem.dir/BankingApplication.cpp.obj	7ff01c2e11601b45
 4711	4837	6901322417045735	Task2_BankSystem.exe	653f3254dea51a63
+31	7812	6902506994630184	CMakeFiles/Task2_BankSystem.dir/BankAccount.cpp.obj	77d2b944d5d6109b
+38	7817	6902506994774936	CMakeFiles/Task2_BankSystem.dir/Client.cpp.obj	427766552c7b7ea5
+21	7818	6902506994650131	CMakeFiles/Task2_BankSystem.dir/SavingsBankAccount.cpp.obj	79556cf42827e91c
+8	7819	6902506994650131	CMakeFiles/Task2_BankSystem.dir/main.cpp.obj	2ad129d421293034
+7813	10165	6902507019134065	CMakeFiles/Task2_BankSystem.dir/BankingApplication.cpp.obj	7ff01c2e11601b45
+10165	10983	6902507027304689	Task2_BankSystem.exe	653f3254dea51a63

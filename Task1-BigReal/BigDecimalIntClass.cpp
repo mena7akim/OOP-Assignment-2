@@ -40,6 +40,13 @@ void BigDecimalInt :: setNumber(string num)
         {
             signNumber = '+';
         }
+        string temp = num, s = "";
+        bool found = 0;
+        for(int i = 0; i < temp.size(); i++){
+            if(temp[i] != '0') found = 1;
+            if(found) s += temp[i];
+        }
+        num = temp;
     }
     else
     {
@@ -351,5 +358,10 @@ ostream &operator << (ostream &out, BigDecimalInt num)
         }
     }
     return out;
+}
+
+istream& operator >> (istream& in, BigDecimalInt &num)
+{
+    in >> num.number;
 }
 

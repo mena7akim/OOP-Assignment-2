@@ -1,6 +1,4 @@
-//
-// Created by over- on 05/11/2022.
-//
+
 
 #ifndef TASK2_BANKSYSTEM_BANKINGAPPLICATION_H
 #define TASK2_BANKSYSTEM_BANKINGAPPLICATION_H
@@ -21,4 +19,9 @@ public:
 };
 
 
-#endif //TASK2_BANKSYSTEM_BANKINGAPPLICATION_H
+// client   --> bankaccount
+// client 2 --> ....
+// client 3 --> ....
+// ,,,
+
+#endif

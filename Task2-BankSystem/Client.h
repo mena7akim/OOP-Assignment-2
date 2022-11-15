@@ -1,6 +1,3 @@
-//
-// Created by over- on 05/11/2022.
-//
 
 #ifndef TASK2_BANKSYSTEM_CLIENT_H
 #define TASK2_BANKSYSTEM_CLIENT_H
@@ -19,8 +16,10 @@ public:
     void setName(string n);
     void setAddress(string ad);
     void setPhone(string ph);
+
     void pointToAccount(BankAccount &account);
     BankAccount& getClientAccount();
+
     string getName() const;
     string getAddress() const;
     string getPhone() const;

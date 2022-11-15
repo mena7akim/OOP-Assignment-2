@@ -33,6 +33,7 @@ public:
     BigDecimalInt operator + (BigDecimalInt number2);
     BigDecimalInt operator - (BigDecimalInt anotherDec);
     friend ostream &operator << (ostream &out, BigDecimalInt num);
+    friend istream& operator >> (istream& in, BigDecimalInt &num);
     int size();
     int sign() const;
     void setSign(char c) { signNumber = c; }

@@ -19,6 +19,7 @@ void Client::setAddress(string ad){
 void Client::setPhone(string ph){
     phone = ph;
 }
+
 void Client::pointToAccount(BankAccount &account) {
     clientAccount = &account;
 }

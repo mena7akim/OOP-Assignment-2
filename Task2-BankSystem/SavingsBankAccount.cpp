@@ -29,7 +29,6 @@ void SavingsBankAccount::setBalance(int bal)
 
 int SavingsBankAccount::getMinBalance() const
 {
-
     return minBalance;
 }
 
@@ -61,3 +60,4 @@ void SavingsBankAccount::deposit(int amount)
         throw invalid_argument("Operation failed, you need to deposit not less than 100");
     }
 }
+

@@ -3,23 +3,36 @@
 
 // Esraa
 
-
 BigReal::BigReal(double realNumber)
 {
-    long long real=realNumber;
-    *decPart= to_string(real);
-    *fractionPart=to_string(realNumber-real);
-
+    long long real = realNumber; // 0.65463
+    string temp = to_string(real);
+    if(temp[0] == '+' || temp[0] == '-') {
+        signNumber = temp[0];
+        temp.erase(temp.begin());
+    }
+    else{
+        signNumber = '+';
+    }
+    *decPart = BigDecimalInt(temp);
+    temp = to_string(realNumber - (double)real);
+    string s = "";
+    bool found = 0;
+    for(int i = 0; i < temp.size(); i++){
+        if(temp[i] == '.') found = 1;
+        if(found) s += temp[i];
+    }
+    if(s[0] == '.') s.erase(s.begin());
+    *fractionPart = BigDecimalInt(s);
 }
 
 BigReal::BigReal(string realNumber)
 {
     string real;
     regex validInput("[-+]?[0-9]*[\\.]?[0-9]*");
-    if( regex_match(realNumber, validInput))
+    if(regex_match(realNumber, validInput))
     {
         int z=0;
-        // setNumber(realNumber);
         if(realNumber[0] == '+')
         {
             realNumber.erase(0,1);
@@ -35,9 +48,9 @@ BigReal::BigReal(string realNumber)
             signNumber = '+';
         }
         long long size = realNumber.length();
-        for(long long i=0;i<size;i++)
+        for(long long i = 0; i < size; i++)
         {
-            z=i;
+            z = i;
             if(realNumber[i]!='.')
             {
                 real += realNumber[i];
@@ -45,13 +58,13 @@ BigReal::BigReal(string realNumber)
             else
                 break;
         }
-        *decPart=real;
+        *decPart = BigDecimalInt(real);
         real.clear();
         for(long long i=(z+1);i<size;i++)
         {
             real+=realNumber[i];
         }
-        *fractionPart=real;
+        *fractionPart = BigDecimalInt(real);
 
     }
     else {
@@ -63,17 +76,16 @@ BigReal::BigReal(string realNumber)
 
 BigReal::BigReal(BigDecimalInt bigInteger)
 {
-    *decPart=bigInteger;
-    signNumber=bigInteger.sign();
+    *decPart = bigInteger;
+    signNumber = bigInteger.sign();
     *fractionPart="0";
-
 }
 
 BigReal::BigReal(const BigReal &other)
 {
-    *decPart=*other.decPart;
-    *fractionPart=*other.fractionPart;
-    signNumber=other.signNumber;
+    *decPart = *other.decPart;
+    *fractionPart = *other.fractionPart;
+    signNumber = other.signNumber;
 
 }
 
@@ -81,9 +93,9 @@ BigReal::BigReal(BigReal&& other) noexcept
 {
     //not * because we don't need save his place
 
-    signNumber=other.signNumber;
-    decPart=other.decPart;
-    fractionPart=other.fractionPart;
+    signNumber = other.signNumber;
+    decPart = other.decPart;
+    fractionPart = other.fractionPart;
     other.fractionPart= nullptr;
     other.decPart= nullptr;
 
@@ -91,10 +103,10 @@ BigReal::BigReal(BigReal&& other) noexcept
 
 BigReal& BigReal::operator= (const BigReal& other)
 {
-    *decPart=*other.decPart;
-    signNumber=other.signNumber;
-    *fractionPart=*other.fractionPart;
-
+    *decPart = *other.decPart;
+    signNumber = other.signNumber;
+    *fractionPart = *other.fractionPart;
+    return *this;
 }
 
 BigReal& BigReal::operator= (BigReal&& other) noexcept
@@ -108,8 +120,7 @@ BigReal& BigReal::operator= (BigReal&& other) noexcept
         other.fractionPart = nullptr;
         other.decPart = nullptr;
     }
-    else
-        return *this;
+    return *this;
 }
 
 
@@ -214,7 +225,7 @@ BigReal BigReal::operator- (const BigReal& other) const {
 
 bool BigReal::operator< (const BigReal& anotherReal) const
 {
-    if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '+')
+    if (this->signNumber == '+' && anotherReal.signNumber == '+')
     {
         if (decPart != anotherReal.decPart)
         {
@@ -239,15 +250,15 @@ bool BigReal::operator< (const BigReal& anotherReal) const
             }
         }
     }
-    else if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '-')
+    else if (this->signNumber== '+' && anotherReal.signNumber == '-')
     {
         return false;
     }
-    else if (decPart.signNumber == '-' && anotherReal.decPart.signNumber == '+')
+    else if (this->signNumber == '-' && anotherReal.signNumber == '+')
     {
         return true;
     }
-    else if (decPart.signNumber == '-' && anotherReal.decPart.signNumber == '-')
+    else if (this->signNumber == '-' && anotherReal.signNumber == '-')
     {
         if (decPart != anotherReal.decPart)
         {
@@ -276,69 +287,13 @@ bool BigReal::operator< (const BigReal& anotherReal) const
 
 bool BigReal::operator> (const BigReal& anotherReal) const
 {
-    if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '+')
-    {
-        if (decPart != anotherReal.decPart)
-        {
-            if (decPart > anotherReal.decPart)
-            {
-                return true;
-            }
-            else if (decPart < anotherReal.decPart)
-            {
-                return false;
-            }
-        }
-        else if (decPart == anotherReal.decPart)
-        {
-            if (fractionPart > anotherReal.fractionPart)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
-    else if (decPart.signNumber == '+' && anotherReal.decPart.signNumber == '-')
-    {
-        return true;
-    }
-    else if (decPart.signNumber == '-' && anotherReal.decPart.signNumber == '+')
-    {
-        return false;
-    }
-    else if (decPart.signNumber == '-' && anotherReal.decPart.signNumber == '-')
-    {
-        if (decPart != anotherReal.decPart)
-        {
-            if (decPart > anotherReal.decPart)
-            {
-                return false;
-            }
-            else if (decPart < anotherReal.decPart)
-            {
-                return true;
-            }
-        }
-        else if (decPart == anotherReal.decPart)
-        {
-            if (fractionPart > anotherReal.fractionPart)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-    }
+    if(!(*this == anotherReal) && !(*this < anotherReal)) return 1;
+    return 0;
 }
 
 bool BigReal::operator== (const BigReal& anotherReal) const
 {
-    if ((decPart == anotherReal.decPart) && (fractionPart == anotherReal.fractionPart) && (decPart.signNumber == anotherReal.decPart.signNumber))
+    if ((decPart == anotherReal.decPart) && (fractionPart == anotherReal.fractionPart) && (this->signNumber == anotherReal.signNumber))
     {
         return true;
     }
@@ -350,7 +305,7 @@ bool BigReal::operator== (const BigReal& anotherReal) const
 
 int BigReal::size() const
 {
-    return fractionPart.size() + decPart.size();
+    return (*fractionPart).size() + (*decPart).size();
 }
 
 int BigReal::sign() const
@@ -373,15 +328,14 @@ ostream& operator << (ostream& out, BigReal num)
     }
     else
     {
-        out << num.signNumber << num.signNumber << num.decPart;
+        out << num.signNumber << num.decPart << "." << num.fractionPart;
     }
+    return out;
 }
 
-istream& operator >> (istream& out, BigReal num)
+istream& operator >> (istream& in, BigReal num)
 {
-    num.decPart >> decPart;
-    num.fractionPart >> fractionPart;
-    num.signNumber >> signNumber;
+
 }
 
 
