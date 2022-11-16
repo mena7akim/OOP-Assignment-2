@@ -22,7 +22,7 @@ bool BigDecimalInt :: checkValidInput(string input)
 // constructor that takes a string as an input.
 void BigDecimalInt :: setNumber(string num)
 {
-    bool validNumber = checkValidInput(num);
+    bool validNumber = 1;
     if(validNumber)
     {
         number = num;
@@ -40,13 +40,6 @@ void BigDecimalInt :: setNumber(string num)
         {
             signNumber = '+';
         }
-        string temp = num, s = "";
-        bool found = 0;
-        for(int i = 0; i < temp.size(); i++){
-            if(temp[i] != '0') found = 1;
-            if(found) s += temp[i];
-        }
-        num = temp;
     }
     else
     {
@@ -58,6 +51,7 @@ void BigDecimalInt :: setNumber(string num)
 // operator < overloading function.
 bool BigDecimalInt :: operator < (const BigDecimalInt& anotherDec)
 {
+
     string comp1 = "", comp2 = "";
     long long len1 = number.length(), len2 = anotherDec.number.length();
 
@@ -126,7 +120,7 @@ bool BigDecimalInt :: operator > (const BigDecimalInt &anotherDec)
 }
 
 // operator == overloading function.
-bool BigDecimalInt :: operator == (const BigDecimalInt anotherDec)
+bool BigDecimalInt :: operator == (const BigDecimalInt &anotherDec)
 {
     if (signNumber == anotherDec.signNumber && number == anotherDec.number)
     {
@@ -138,14 +132,19 @@ bool BigDecimalInt :: operator == (const BigDecimalInt anotherDec)
         return false;
     }
 }
+bool BigDecimalInt :: operator != (const BigDecimalInt &anotherDec) {
+    return !(*this == anotherDec);
+}
+
 
 // operator = overloading function.
-BigDecimalInt& BigDecimalInt :: operator = (BigDecimalInt anotherDec)
+BigDecimalInt& BigDecimalInt::operator= (const BigDecimalInt &anotherDec)
 {
     signNumber = anotherDec.signNumber;
     number = anotherDec.number;
     return *this;
 }
+
 
 //addition implementation.
 string addition(string num1,string num2)
@@ -359,9 +358,3 @@ ostream &operator << (ostream &out, BigDecimalInt num)
     }
     return out;
 }
-
-istream& operator >> (istream& in, BigDecimalInt &num)
-{
-    in >> num.number;
-}
-

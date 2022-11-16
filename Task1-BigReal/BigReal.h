@@ -28,7 +28,7 @@ class BigReal {
         int size() const;
         int sign() const;
         friend ostream& operator << (ostream& out, BigReal num);
-        friend istream& operator >> (istream& out, BigReal num);
+        friend istream& operator >> (istream& out, BigReal &num);
 };
 
 
